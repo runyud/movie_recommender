@@ -6,16 +6,17 @@ from ratings.tasks import generate_fake_reviews
 
 User = get_user_model()
 
+
 class Command(BaseCommand):
     def add_arguments(self, parser):
-        parser.add_argument("count", nargs='?', default=10, type=int)
+        parser.add_argument("count", nargs="?", default=10, type=int)
         parser.add_argument("--users", default=10000, type=int)
-        parser.add_argument("--show-total", action='store_true', default=False)
-    
+        parser.add_argument("--show-total", action="store_true", default=False)
+
     def handle(self, *args, **options):
         count = options.get("count")
-        show_all = options.get('show_total')
-        user_count = options.get('users')
+        show_all = options.get("show_total")
+        user_count = options.get("users")
         print(count, show_all, user_count)
         new_ratings = generate_fake_reviews(count=count, users=user_count)
         print(f"New ratings: {len(new_ratings)}")

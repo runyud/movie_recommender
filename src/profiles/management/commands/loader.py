@@ -6,18 +6,19 @@ from movies.models import Movie
 
 User = get_user_model()
 
+
 class Command(BaseCommand):
     def add_arguments(self, parser):
-        parser.add_argument("count", nargs='?', default=10, type=int)
-        parser.add_argument("--show-total", action='store_true', default=False)
-        parser.add_argument("--movies", action='store_true', default=False)
-        parser.add_argument("--users", action='store_true', default=False)
+        parser.add_argument("count", nargs="?", default=10, type=int)
+        parser.add_argument("--show-total", action="store_true", default=False)
+        parser.add_argument("--movies", action="store_true", default=False)
+        parser.add_argument("--users", action="store_true", default=False)
 
     def handle(self, *args, **options):
         count = options.get("count")
-        show_all = options.get('show_total')
-        load_movies = options.get('movies')
-        generate_users = options.get('users')
+        show_all = options.get("show_total")
+        load_movies = options.get("movies")
+        generate_users = options.get("users")
 
         if load_movies:
             movie_dataset = cfehome_utils.load_movie_data(limit=count)
@@ -32,9 +33,7 @@ class Command(BaseCommand):
             new_users = []
             for profile in profiles:
                 # User.objects.create(**profile)
-                new_users.append(
-                    User(**profile)
-                )
+                new_users.append(User(**profile))
 
             user_bulk = User.objects.bulk_create(new_users, ignore_conflicts=True)
             print(f"New users created: {len(user_bulk)}")
