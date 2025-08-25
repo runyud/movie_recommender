@@ -15,9 +15,14 @@ app.config_from_object("django.conf:settings", namespace="CELERY")
 app.autodiscover_tasks()
 
 app.conf.beat_schedule = {
+    # "run_movie_rating_avg_every_30" : {
+    #     "task" : "task_calculate_movie_ratings",
+    #     "schedule" : 60 * 30,  # 30 min = 60 * 30,
+    #     "kwargs": {"count": 20_000}
+    # }
+
     "run_movie_rating_avg_every_30" : {
-        "task" : "task_calculate_movie_ratings",
+        "task" : "task_update_movie_ratings",
         "schedule" : 60 * 30,  # 30 min = 60 * 30,
-        "kwargs": {"count": 20_000}
     }
 }
