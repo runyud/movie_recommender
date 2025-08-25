@@ -40,14 +40,25 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sites",
     # external apps
-    'django_celery_beat', # scheduler
-    'django_celery_results', # saves our task results
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "django_celery_beat", # scheduler
+    "django_celery_results", # saves our task results
     # internal apps
     "movies",
     "profiles",
     "ratings",
 ]
+
+SITE_ID = 1
+LOGIN_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = '/'
+ACCOUNT_LOGIN_METHODS = {'username'}
+ACCOUNT_EMAIL_VERIFICATION = "none"
+# transactional emails
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -57,6 +68,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "allauth.account.middleware.AccountMiddleware", 
 ]
 
 ROOT_URLCONF = "cfehome.urls"
