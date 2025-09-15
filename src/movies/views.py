@@ -9,6 +9,7 @@ class MovieListView(generic.ListView):
     # context -> object_list
     queryset = Movie.objects.all().order_by('-rating_avg')
 
+
 movie_list_view = MovieListView.as_view()
 
 class MovieDetailView(generic.DetailView):
