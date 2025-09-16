@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "allauth.socialaccount",
     "django_celery_beat", # scheduler
     "django_celery_results", # saves our task results
+    "django_htmx",
     # internal apps
     "movies",
     "profiles",
@@ -69,6 +70,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "allauth.account.middleware.AccountMiddleware", 
+    "django_htmx.middleware.HtmxMiddleware", # request.htmx
 ]
 
 ROOT_URLCONF = "cfehome.urls"
